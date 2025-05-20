@@ -10,11 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^10.0.8",
+    "clsx": "^2.1.1",
+    "motion": "^12.12.1",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.37.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-animated-cursor": "^2.11.2",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.0",
+    "three": "^0.176.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@react-three/fiber": "^9.1.2",
+    "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/postcss": "^4.1.7",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
