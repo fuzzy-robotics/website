@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Logo({ scale = 1 }) {
     const baseSizeTop = 53;
     const baseSizeBottom = 50;
