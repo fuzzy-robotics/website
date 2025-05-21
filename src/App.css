@@ -1,0 +1,13 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    --dot-bg: #f4f6ff;
+    --dot-color: rgb(186, 186, 186);
+    --dot-size: 2px;
+    --dot-space: 30px;
+    background:
+    linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+}
