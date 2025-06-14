@@ -1,6 +1,7 @@
 name: furo
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - deploy
