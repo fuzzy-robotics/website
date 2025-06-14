@@ -12,11 +12,11 @@ jobs:
     steps:
       # checkout the repo
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       # setup nodejs
       - name: Setup NodeJs
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
@@ -30,7 +30,7 @@ jobs:
 
       # Deploy project
       - name: Deploy Project to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist
