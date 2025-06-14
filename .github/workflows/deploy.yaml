@@ -1,0 +1,35 @@
+name: furo
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  build-deploy: 
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the repo
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # setup nodejs
+      - name: Setup NodeJs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # npm install
+      - name: Install Deps
+        run: npm install --force
+
+      # build project
+      - name: Build Project
+        run: npm run build
+
+      # Deploy project
+      - name: Deploy Project to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          publish_dir: dist
