@@ -106,7 +106,7 @@ const HeroSection = ({data}) => {
           <div className="lg:col-span-5 relative">
             <div className="relative w-full h-[600px] animate-fade-in delay-600">
               <img 
-                  src="/public/lovable-uploads/ChatGPT Image Jun 8, 2025, 01_06_36 AM.png" 
+                  src="./lovable-uploads/ChatGPT Image Jun 8, 2025, 01_06_36 AM.png" 
                   alt="Advanced robotics technology"
                   className='object-cover h-[600px] rounded-2xl opacity-[0.9]'
               />
