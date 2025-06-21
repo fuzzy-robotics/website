@@ -39,7 +39,7 @@ jobs:
           enable_jekyll: true
 
   copy-files-to-build:
-    needs: [gh-pages]
+    needs: [build-deploy]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
