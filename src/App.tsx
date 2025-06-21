@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AnimatedCursor
+    {/* <AnimatedCursor
       trailingSpeed={8}
       innerSize={8}
       outerSize={50}
@@ -26,7 +26,7 @@ const App = () => (
       innerStyle={{
         backgroundColor: "#474444",
       }}
-    />
+    /> */}
     <TooltipProvider>
       <Toaster />
       <Sonner />
