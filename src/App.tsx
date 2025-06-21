@@ -13,6 +13,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <div>HEllo testing 123</div>
     <AnimatedCursor
       trailingSpeed={8}
       innerSize={8}
@@ -27,7 +28,6 @@ const App = () => (
         backgroundColor: "#474444",
       }}
     />
-    <div>HEllo testing 123</div>
     <TooltipProvider>
       <Toaster />
       <Sonner />

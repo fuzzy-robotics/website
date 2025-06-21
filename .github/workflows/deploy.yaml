@@ -49,4 +49,4 @@ jobs:
         uses: planetoftheweb/copy-to-branches@v1.3
         env:
           key: deploy
-          files: "**/*"
+          files: index.html
