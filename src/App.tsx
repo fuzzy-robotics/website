@@ -13,7 +13,6 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <div>HEllo testing 123</div>
     <AnimatedCursor
       trailingSpeed={8}
       innerSize={8}
