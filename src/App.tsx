@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,26 +7,27 @@ import Index from "./pages/Index";
 import Projects from "./pages/Projects";
 import Blogs from "./pages/Blogs";
 import NotFound from "./pages/NotFound";
-import AnimatedCursor from "react-animated-cursor"
+import AnimatedCursor from "react-animated-cursor";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AnimatedCursor 
+    <AnimatedCursor
       trailingSpeed={8}
       innerSize={8}
       outerSize={50}
       innerScale={1}
       outerScale={2}
-      outerAlpha={0} 
+      outerAlpha={0}
       outerStyle={{
-        border: '2px solid rgba(97, 122, 246, 0.26)'
+        border: "2px solid rgba(97, 122, 246, 0.26)",
       }}
       innerStyle={{
-        backgroundColor: '#474444'
+        backgroundColor: "#474444",
       }}
     />
+    <div>HEllo testing 123</div>
     <TooltipProvider>
       <Toaster />
       <Sonner />
