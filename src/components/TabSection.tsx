@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import TabButton from './TabButton';
-import { Lightbulb, Wrench, Settings } from 'lucide-react';
 import { ThreeDMarquee } from './ui/grid-motion';
 
 const TabSection = ({data}) => {
@@ -16,7 +15,9 @@ const TabSection = ({data}) => {
   // "public/marquee-images/6841cb7c-0e32-4c86-b640-5d45df74d5f1 (1).png",
   // "public/marquee-images/299508e6-b203-4acb-bd67-54885f291b4a.png",
 
-  const images = data['images']
+  const images = data['images'].map((imgPath: string) =>
+    imgPath.replace(/^public\//, './')
+  );
 
   const tabs = [
     {
