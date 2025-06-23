@@ -7,7 +7,7 @@ on:
       - deploy
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       # checkout the repo
@@ -28,25 +28,26 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      # Deploy project
-      - name: Deploy Project to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          force_orphan: true
-          enable_jekyll: true
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
-  copy-files-to-build:
-    needs: [build-deploy]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Copy To Branches Action
-        uses: planetoftheweb/copy-to-branches@v1.3
-        env:
-          key: deploy
-          files: ./src/**
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+  # copy-files-to-build:
+  #   needs: [build-deploy]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Copy To Branches Action
+  #       uses: planetoftheweb/copy-to-branches@v1.3
+  #       env:
+  #         key: deploy
+  #         files: ./src/**
