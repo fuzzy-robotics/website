@@ -33,6 +33,12 @@ jobs:
       - name: Build Project
         run: npm run build
 
+      # NEW ── upload the build as the special “github-pages” artifact
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist # ‹-- folder to publish
+
   deploy:
     needs: build
     environment:
