@@ -1,0 +1,52 @@
+name: Build and deploy Vite site to GitHub Pages
+
+on:
+  push:
+    branches: [deploy-old]       # or deploy branch of your choice
+  workflow_dispatch:       # manual trigger if you ever need it
+
+permissions:
+  contents: read           # checkout
+  pages: write             # publish
+  id-token: write          # OIDC for Pages
+
+concurrency:               # prevents parallel deployments
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20          # pick a version you test locally
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install --force                 # fast & reproducible
+
+      - name: Build with Vite
+        run: npm run build          # outputs to ./dist by default
+
+      - name: Upload static site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist               # folder to publish
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
