@@ -1,64 +1,102 @@
-name: furo
+name: Deploy Vite site to GitHub Pages
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - deploy
+    branches: [deploy]
+  workflow_dispatch:
 
 permissions:
-  contents: read # checkout
-  pages: write # publish
-  id-token: write # OIDC for Pages
+  contents: read
+  pages: write
+  id-token: write # required by deploy-pages
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # checkout the repo
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      # setup nodejs
-      - name: Setup NodeJs
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 20 # any LTS ≥20
 
-      # npm install
-      - name: Install Deps
-        run: npm install --force
+      - run: npm install --force
+      - run: npm run build # ➜ dist/
 
-      # build project
-      - name: Build Project
-        run: npm run build
-
-      # NEW ── upload the build as the special “github-pages” artifact
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist # ‹-- folder to publish
+          path: dist # folder to publish
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
-
-    runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
-        id: deploy
+      - id: deploy
         uses: actions/deploy-pages@v4
-  # copy-files-to-build:
-  #   needs: [build-deploy]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #     - name: Copy To Branches Action
-  #       uses: planetoftheweb/copy-to-branches@v1.3
-  #       env:
-  #         key: deploy
-  #         files: ./src/**
+# name: furo
+
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - deploy
+
+# permissions:
+#   contents: read # checkout
+#   pages: write # publish
+#   id-token: write # OIDC for Pages
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       # checkout the repo
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
+
+#       # setup nodejs
+#       - name: Setup NodeJs
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 20
+
+#       # npm install
+#       - name: Install Deps
+#         run: npm install --force
+
+#       # build project
+#       - name: Build Project
+#         run: npm run build
+
+#       # NEW ── upload the build as the special “github-pages” artifact
+#       - name: Upload Pages artifact
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: dist # ‹-- folder to publish
+
+#   deploy:
+#     needs: build
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deploy.outputs.page_url }}
+
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Deploy to GitHub Pages
+#         id: deploy
+#         uses: actions/deploy-pages@v4
+# copy-files-to-build:
+#   needs: [build-deploy]
+#   runs-on: ubuntu-latest
+#   steps:
+#     - uses: actions/checkout@v3
+#       with:
+#         fetch-depth: 0
+#     - name: Copy To Branches Action
+#       uses: planetoftheweb/copy-to-branches@v1.3
+#       env:
+#         key: deploy
+#         files: ./src/**
