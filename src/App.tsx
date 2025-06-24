@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    {/* <AnimatedCursor
+    <AnimatedCursor
       trailingSpeed={8}
       innerSize={8}
       outerSize={50}
@@ -26,12 +26,13 @@ const App = () => (
       innerStyle={{
         backgroundColor: "#474444",
       }}
-    /> */}
+    />
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Index />} />
           <Route path="/website" element={<Index />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/blogs" element={<Blogs />} />
